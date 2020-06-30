@@ -1,0 +1,50 @@
+﻿@model IEnumerable<WildcatMicroFund.ViewModels.TakeSurveyViewModel>
+
+
+<!--TakeSurveyViewModlePOC-->
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SurveyName)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SurveyName)
+                </td>
+                <td>
+                    <a asp-action="TakeSurveyWithSurveyID" asp-route-id="@item.ID">TakeSurvey</a>
+                </td>
+            </tr>
+
+            }
+
+        </tbody>
+        
+    </table>
+
+
+</body>
+
+</html>

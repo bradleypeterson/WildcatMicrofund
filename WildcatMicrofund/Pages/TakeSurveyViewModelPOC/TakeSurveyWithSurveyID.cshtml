@@ -1,0 +1,82 @@
+﻿@model IEnumerable<WildcatMicroFund.ViewModels.TakeSurveyViewModel>
+
+<!--TakeSurveyViewModlePOC-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+
+   
+
+    @foreach (var question in Model.SurveyCode.Questions)
+    {
+
+        @question.QuestionText
+
+        @if (question.QuestionTypeID == 2)
+        {
+            //single choice
+            foreach (var choice in question.Choices)
+            {
+                <br />
+                <!-- Need to bind the response here-->
+                @choice.ChoiceText @Html.RadioButton(question.ID.ToString(), choice.ChoiceText)
+
+            }
+        }
+        else if (question.QuestionTypeID == 1)
+        {
+            //single choice
+            foreach (var choice in question.Choices)
+            {
+                <br />
+                <!-- Need to bind the response here-->
+                @choice.ChoiceText @Html.CheckBox(question.ID.ToString(), choice.ChoiceText)
+            }
+        }
+        else if (question.QuestionTypeID == 6)
+        {
+            // Text Response
+            <br />
+            <!-- Need to bind the response here-->
+            <input asp-for="SurveyCode.Questions[1]" />
+            @Html.TextArea(question.ID.ToString(), null, new { @class = "form-control" })
+        }
+        else if (question.QuestionTypeID == 5)
+        {
+            // numeric Response
+            <br />
+            <!-- Need to bind the response here-->
+            @Html.TextBox(question.ID.ToString(), null, new { @class = "form-control" })
+        }
+        else if (question.QuestionTypeID == 4)
+        {
+            // Date Response
+            <br />
+            <!-- Need to bind the response here-->
+            @Html.TextBox(question.ID.ToString(), null, new { @class = "form-control" })
+        }
+        else if (question.QuestionTypeID == 3)
+        {
+            // Yes or no
+            <br />
+            <!-- Need to bind the response here-->
+            <p>Yes @Html.RadioButton(question.ID.ToString(), "yes")</p>
+            <p>
+                No @Html.RadioButton(question.ID.ToString(), "no")
+            </p>
+        }
+
+        <br />
+        <hr />
+
+    }
+
+
+</body>
+
+</html>
